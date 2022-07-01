@@ -1,0 +1,3 @@
+# Project exclude paths
+/brace-compiler/target/
+/brace-compiler-common/target/
