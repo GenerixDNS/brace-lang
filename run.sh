@@ -1,0 +1,1 @@
+gcc -fno-asynchronous-unwind-tables -S compiled.c
