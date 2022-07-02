@@ -1,0 +1,3 @@
+C:/Users/Alexa/Desktop/brace-lang/brace-receiver/cmake-build-debug/CMakeFiles/brace_receiver.dir
+C:/Users/Alexa/Desktop/brace-lang/brace-receiver/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/Alexa/Desktop/brace-lang/brace-receiver/cmake-build-debug/CMakeFiles/rebuild_cache.dir
