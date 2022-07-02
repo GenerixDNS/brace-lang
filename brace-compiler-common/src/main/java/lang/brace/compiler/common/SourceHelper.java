@@ -1,7 +1,6 @@
 package lang.brace.compiler.common;
 
-import jdk.internal.joptsimple.internal.Strings;
-import lang.brace.compiler.common.tools.Pair;
+import lang.brace.compiler.tools.Pair;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -86,8 +85,8 @@ public class SourceHelper {
         for (int i = 0; i <= starts.size(); i++) {
             if (starts.get(i) != null && ends.get(i) != null) {
                 stringBuilder.delete(
-                        starts.get(i).getFirst(),
-                        ends.get(i).getFirst());
+                        starts.get(i).first(),
+                        ends.get(i).first());
             } else return stringBuilder.toString();
         }
         return stringBuilder.toString();
@@ -221,12 +220,6 @@ public class SourceHelper {
             i++;
         }
         return results;
-    }
-
-    public static void main(String[] args) {
-
-        System.out.println(Strings.surround("This is a Test", 'T', 'e'));
-
     }
 
 }
