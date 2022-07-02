@@ -9,7 +9,7 @@ package lang.brace.compiler.common;
 
 public class Compiler {
     private static final Compiler instance = new Compiler();
-    private String source;
+    private String[] source;
     private final ConstCompilerRawPool rawPool = new ConstCompilerRawPool();
 
     public Compiler() {
@@ -23,11 +23,11 @@ public class Compiler {
         return instance;
     }
 
-    public String getSource() {
+    public String[] getSource() {
         return source;
     }
 
-    public void setSource(String source) {
+    public void setSource(String[] source) {
         this.source = source;
     }
 }

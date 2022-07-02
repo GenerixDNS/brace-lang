@@ -10,6 +10,8 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * this doc was created on 01.07.2022
@@ -21,7 +23,7 @@ import java.nio.file.Paths;
 public class DefaultBraceBufferImpl implements IBraceBuffer {
     private File directory;
     private String name;
-    private String output;
+    private List<String> output = new LinkedList<>();
 
     @SuppressWarnings("ConstantConditions")
     public DefaultBraceBufferImpl(File directory) {
@@ -72,15 +74,16 @@ public class DefaultBraceBufferImpl implements IBraceBuffer {
         } catch (IOException exception) {
             exception.printStackTrace();
         }
-        this.output = raw.substring(0, raw.lastIndexOf("\n"));
+        this.output.add(raw.substring(0, raw.lastIndexOf("\n")));
         return this;
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Override
-    public String getRawOutput() {
-        if (this.output != null && !this.output.equals("")) {
-            Compiler.getInstance().setSource(this.output);
-            return this.output;
+    public String[] getRawOutput() {
+        if (this.output != null) {
+            Compiler.getInstance().setSource((String[]) this.output.toArray());
+            return (String[]) this.output.toArray();
         } else throw new UnsupportedOperationException("An unexpected compiler error has occurred!");
     }
 

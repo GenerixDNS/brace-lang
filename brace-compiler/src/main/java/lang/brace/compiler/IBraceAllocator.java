@@ -1,6 +1,7 @@
 package lang.brace.compiler;
 
 import java.io.File;
+import java.util.List;
 
 /**
  *
@@ -13,6 +14,8 @@ import java.io.File;
 
 public interface IBraceAllocator {
 
+    void allocate(String source, List<String> words);
 
+    void run();
 
 }

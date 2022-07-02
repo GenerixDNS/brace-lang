@@ -1,9 +1,9 @@
 package lang.brace.compiler.common;
 
+import jdk.internal.joptsimple.internal.Strings;
 import lang.brace.compiler.common.tools.Pair;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -152,6 +152,20 @@ public class SourceHelper {
         return null;
     }
 
+    public static String inFront(String source, String target) {
+        String[] f = clusterOne(source, ' ').split(" ");
+        int i = 0;
+        for (String s : f) {
+            if (s.equals(target)) {
+                if (f[i-1] != null) {
+                    return f[i-1];
+                }
+            }
+            i++;
+        }
+        return null;
+    }
+
     public static String afterIgnoreCase(String source, String target) {
         String[] f = clusterOne(source, ' ').split(" ");
         int i = 0;
@@ -166,10 +180,52 @@ public class SourceHelper {
         return null;
     }
 
+    @SuppressWarnings("ConstantConditions")
+    public static List<String> get(String source, String start, String end) {
+        List<String> results = new ArrayList<>();
+        StringBuilder cashed = new StringBuilder(source);
+        String startC = after(source, start);
+        String endC = inFront(source, end);
+        if (startC == null && endC == null) return results;
+        while (cashed.toString().contains(startC) && cashed.toString().contains(endC)) {
+            StringBuilder result = new StringBuilder(cashed.toString());
+            int startI = result.indexOf(startC);
+            int endI = result.indexOf(endC);
+            results.add(result
+                    .delete(0, startI)
+                    .delete(endI, result.length())
+                    .toString());
+            cashed.delete(startI, endI);
+        }
+        return results;
+    }
+
+    public static String cut(String source, String start, String end) {
+        StringBuilder stringBuilder = new StringBuilder();
+        while (source.contains(start) && source.contains(end)) {
+            stringBuilder.delete(source.indexOf(start), source.indexOf(end));
+        }
+        return stringBuilder.toString();
+    }
+
+    public static List<String> afters(String source, String target) {
+        String[] words = clusterOne(source, ' ').split(" ");
+        List<String> results = new ArrayList<>();
+        int i = 0;
+        for (String word : words) {
+            if (word.equals(target)) {
+                if (words.length-1 > i) {
+                    results.add(words[i+1]);
+                }
+            }
+            i++;
+        }
+        return results;
+    }
+
     public static void main(String[] args) {
 
-        String t = "public  static void";
-        System.out.println(afterIgnoreCase(t, "public"));
+        System.out.println(Strings.surround("This is a Test", 'T', 'e'));
 
     }
 

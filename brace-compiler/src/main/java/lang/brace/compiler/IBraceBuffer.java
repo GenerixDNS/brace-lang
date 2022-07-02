@@ -39,7 +39,7 @@ public interface IBraceBuffer {
      *
      * @return compiled project
      */
-    String getRawOutput();
+    String[] getRawOutput();
 
     /**
      *
